@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/my-react-countries/static/css/main.a364175b.chunk.css",
+    "main.js": "/my-react-countries/static/js/main.0bdb7bbd.chunk.js",
+    "main.js.map": "/my-react-countries/static/js/main.0bdb7bbd.chunk.js.map",
+    "runtime-main.js": "/my-react-countries/static/js/runtime-main.fa127f66.js",
+    "runtime-main.js.map": "/my-react-countries/static/js/runtime-main.fa127f66.js.map",
+    "static/css/2.150d169a.chunk.css": "/my-react-countries/static/css/2.150d169a.chunk.css",
+    "static/js/2.c58fd953.chunk.js": "/my-react-countries/static/js/2.c58fd953.chunk.js",
+    "static/js/2.c58fd953.chunk.js.map": "/my-react-countries/static/js/2.c58fd953.chunk.js.map",
+    "static/js/3.1079a8bf.chunk.js": "/my-react-countries/static/js/3.1079a8bf.chunk.js",
+    "static/js/3.1079a8bf.chunk.js.map": "/my-react-countries/static/js/3.1079a8bf.chunk.js.map",
+    "index.html": "/my-react-countries/index.html",
+    "static/css/2.150d169a.chunk.css.map": "/my-react-countries/static/css/2.150d169a.chunk.css.map",
+    "static/css/main.a364175b.chunk.css.map": "/my-react-countries/static/css/main.a364175b.chunk.css.map",
+    "static/js/2.c58fd953.chunk.js.LICENSE.txt": "/my-react-countries/static/js/2.c58fd953.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fa127f66.js",
+    "static/css/2.150d169a.chunk.css",
+    "static/js/2.c58fd953.chunk.js",
+    "static/css/main.a364175b.chunk.css",
+    "static/js/main.0bdb7bbd.chunk.js"
+  ]
+}
