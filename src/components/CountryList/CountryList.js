@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 // sortable? https://www.smashingmagazine.com/2020/03/sortable-tables-react/
 const useSortableData = (items, config = null) => {
-    const [sortConfig, setSortConfig] = React.useState(config);
+    const [sortConfig, setSortConfig] = useState(config);
 
     const sortedItems = React.useMemo(() => {
         let sortableItems = [...items];

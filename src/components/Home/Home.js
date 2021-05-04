@@ -38,7 +38,7 @@ const Home = () => {
 
     return (
         <>
-            <h3>Home</h3>
+            <h3 className='text-center'>Countries</h3>
             {console.log(data.continents)}
             {data && data.continents && data.continents.length > 0 &&
                 <ContinentList continents={data.continents} />}
