@@ -1,0 +1,14 @@
+POST https://countries.trevorblades.com/
+Content-Type: application/json
+
+{
+    "query": "{countries {name native emoji code phone }}"
+}
+
+###
+POST https://countries.trevorblades.com/
+Content-Type: application/json
+
+{
+    "query":"{languages {name code native}}"
+}
