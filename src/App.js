@@ -32,10 +32,13 @@ export default function App() {
           renders the first one that matches the current URL. */}
       <Switch>
         <Route path="/about">
-          <About />
+          <About/>
         </Route>
         <Route path="/users">
           <Users />
+        </Route>
+        <Route path="/apollo">
+          <Apollo/>
         </Route>
         <Route path="/">
           <Home />
@@ -48,8 +51,12 @@ export default function App() {
   function About() {
     return <h2>About</h2>;
   }
+
+  function Apollo() {
+    return <h2>Apollo</h2>;
+  }
   
   function Users() {
-    return <h2>Users</h2>;
+    return <h2>Axiom</h2>;
   }
 }
