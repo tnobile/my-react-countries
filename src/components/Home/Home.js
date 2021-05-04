@@ -1,9 +1,6 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import ContinentList from '../ContinentList/ContinentList'
-import CountryList from '../CountryList/CountryList'
-
-import styles from './Home.module.css'
 
 const endpoint = "https://countries.trevorblades.com"
 const FILMS_QUERY = `

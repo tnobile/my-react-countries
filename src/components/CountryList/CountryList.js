@@ -4,47 +4,47 @@ import React, { useState } from 'react'
 // sortable? https://www.smashingmagazine.com/2020/03/sortable-tables-react/
 const useSortableData = (items, config = null) => {
     const [sortConfig, setSortConfig] = React.useState(config);
-  
+
     const sortedItems = React.useMemo(() => {
-      let sortableItems = [...items];
-      if (sortConfig !== null) {
-        sortableItems.sort((a, b) => {
-          if (a[sortConfig.key] < b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? -1 : 1;
-          }
-          if (a[sortConfig.key] > b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? 1 : -1;
-          }
-          return 0;
-        });
-      }
-      return sortableItems;
+        let sortableItems = [...items];
+        if (sortConfig !== null) {
+            sortableItems.sort((a, b) => {
+                if (a[sortConfig.key] < b[sortConfig.key]) {
+                    return sortConfig.direction === 'ascending' ? -1 : 1;
+                }
+                if (a[sortConfig.key] > b[sortConfig.key]) {
+                    return sortConfig.direction === 'ascending' ? 1 : -1;
+                }
+                return 0;
+            });
+        }
+        return sortableItems;
     }, [items, sortConfig]);
-  
+
     const requestSort = (key) => {
-      let direction = 'ascending';
-      if (
-        sortConfig &&
-        sortConfig.key === key &&
-        sortConfig.direction === 'ascending'
-      ) {
-        direction = 'descending';
-      }
-      setSortConfig({ key, direction });
+        let direction = 'ascending';
+        if (
+            sortConfig &&
+            sortConfig.key === key &&
+            sortConfig.direction === 'ascending'
+        ) {
+            direction = 'descending';
+        }
+        setSortConfig({ key, direction });
     };
-  
+
     return { items: sortedItems, requestSort, sortConfig };
-  };
-  
+};
+
 
 const CountryList = ({ ccode, cname, countries }) => {
-    const [sortedField, setSortedField] = useState(null);
+    //const [sortedField, setSortedField] = useState(null);
     const { items, requestSort, sortConfig } = useSortableData(countries);
     const getClassNamesFor = (name) => {
-      if (!sortConfig) {
-        return;
-      }
-      return sortConfig.key === name ? sortConfig.direction : undefined;
+        if (!sortConfig) {
+            return;
+        }
+        return sortConfig.key === name ? sortConfig.direction : undefined;
     };
     const handleSort = e => {
         requestSort(e.target.getAttribute('name'))
@@ -79,10 +79,10 @@ const CountryList = ({ ccode, cname, countries }) => {
                     <th scople='col' name='native' onClick={handleSort} className={styles[getClassNamesFor('native')]}>native</th>
                     <th scople='col' name='ccy' onClick={handleSort} className={styles[getClassNamesFor('ccy')]}>ccy</th>
                     <th scople='col' name='capital' onClick={handleSort} className={styles[getClassNamesFor('capital')]}>capital</th>
-                    <th scople='col'>phone</th>
+                    <th scople='col' name='phone' onClick={handleSort} className={styles[getClassNamesFor('phone')]}>phone</th>
                     <th scople='col' name='languages' onClick={handleSort} className={styles[getClassNamesFor('languages')]}>languages</th>
                     <th scople='col' name='continent' onClick={handleSort} className={styles[getClassNamesFor('continent')]}>continent</th>
-                    <th scople='col'>ccode</th>
+                    <th scople='col' name='ccode' onClick={handleSort} className={styles[getClassNamesFor('ccode')]}>code</th>
                 </tr>
             </thead>
             <tbody>
