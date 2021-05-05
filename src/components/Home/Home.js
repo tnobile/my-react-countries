@@ -43,9 +43,6 @@ const Home = () => {
         setSelected(s)
     }
 
-    const selectMany = (items) => {
-        items.map(i => i.countries).reduce((a, b) => a.concat(b));
-    };
     return (
         // fluid for widh: 100%
         <div className="container-fluid">
