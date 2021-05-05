@@ -19,6 +19,7 @@ const FILMS_QUERY = `
 
 const Home = () => {
     const [selected, setSelected] = useState('AS')
+    const [city, setCity] = useState()
     const { data, isLoading, error } = useQuery("launches", () => {
         return fetch(endpoint, {
             method: "POST",
@@ -41,6 +42,10 @@ const Home = () => {
         console.log('selected', s)
         setSelected(s)
     }
+
+    const selectMany = (items) => {
+        items.map(i => i.countries).reduce((a, b) => a.concat(b));
+    };
     return (
         // fluid for widh: 100%
         <div className="container-fluid">
@@ -50,15 +55,15 @@ const Home = () => {
                 </div>
             </div>
             <div className="row" >
-                <div className="col">
+                <div className="col-3">
                     <div class='input-group mb-3'>
                         <div className="input-group-prepend">
                             <button className="btn btn-outline-primary" type="button">filter</button>
                         </div>
-                        <input type='text' className='form-control' placeholder="filter by" ></input>
+                        <input type='text' className='form-control' placeholder="filter by" value={city}></input>
                     </div>
                 </div>
-                <div className="col" >
+                <div className="col-9" >
                     <div className='form-group form-inline'>
                         <label el className='mx-3' for='selector'>Continents</label>
                         {
@@ -71,6 +76,18 @@ const Home = () => {
                         <select name="selector" class="form-control" value={selected}>
                             {data && data.continents && data.continents.map(o => <option value={o.code}>{o.name}</option>)}
                         </select>
+                        <div className="mr-2">==&gt;</div>
+                        {
+                            data && data.continents && data.continents.length > 0 &&
+                            <Dropdown
+                                selectedLabelChanged={setCity}
+                                options={
+                                    data.continents
+                                        .filter(o => o.code === selected)
+                                        .flatMap(c => c.countries) //selectMany!
+                                        .map(o => { return { "value": o.code, "label": o.name } })}
+                            />
+                        }
                     </div>
                 </div>
             </div>
@@ -78,7 +95,7 @@ const Home = () => {
                 <div className="col">
                     {console.log(data.continents)}
                     {data && data.continents && data.continents.length > 0 &&
-                        <ContinentList continents={data.continents} selected={selected} />}
+                        <ContinentList continents={data.continents} selectedContinent={selected} seletedCity={city} />}
                     {!data && <div>no data...</div>}
                 </div>
             </div>
