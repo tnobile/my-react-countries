@@ -1,11 +1,12 @@
-import React from 'react'
+import { Dropdown } from '../Dropdown/Dropdown';
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import ContinentList from '../ContinentList/ContinentList'
 
 const endpoint = "https://countries.trevorblades.com"
 const FILMS_QUERY = `
   {
-    continents(filter:{code:{eq:"AS"}}) {
+    continents{
         code name countries { 
             code emoji name native capital currency phone
             languages {name native code} 
@@ -17,34 +18,71 @@ const FILMS_QUERY = `
 // continents(filter:{ code:{eq:"AS"}}) {name}
 
 const Home = () => {
+    const [selected, setSelected] = useState('AS')
     const { data, isLoading, error } = useQuery("launches", () => {
         return fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ query: FILMS_QUERY })
-        })
-            .then(response => {
-                if (response.status >= 400) {
-                    throw new Error("Error fetching data");
-                } else {
-                    return response.json();
-                }
-            })
-            .then(json => json.data)
+        }).then(response => {
+            if (response.status >= 400) {
+                throw new Error("Error fetching data");
+            } else {
+                return response.json();
+            }
+        }).then(json => json.data)
     })
+
 
     if (isLoading) return "Loading...";
     if (error) return <pre>{error.message}</pre>;
 
+    const selectionChanged = s => {
+        console.log('selected', s)
+        setSelected(s)
+    }
     return (
-        <>
-            <h3 className='text-center'>Countries</h3>
-            {console.log(data.continents)}
-            {data && data.continents && data.continents.length > 0 &&
-                <ContinentList continents={data.continents} />}
-            {!data && <div>no data...</div>}
-            <div>End</div>
-        </>
+        // fluid for widh: 100%
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col">
+                    <h2 className='text-center m-4'>Countries [{selected}] by useQuery hook</h2>
+                </div>
+            </div>
+            <div className="row" >
+                <div className="col">
+                    <div class='input-group mb-3'>
+                        <div className="input-group-prepend">
+                            <button className="btn btn-outline-primary" type="button">filter</button>
+                        </div>
+                        <input type='text' className='form-control' placeholder="filter by" ></input>
+                    </div>
+                </div>
+                <div className="col" >
+                    <div className='form-group form-inline'>
+                        <label el className='mx-3' for='selector'>Continents</label>
+                        {
+                            data && data.continents && data.continents.length > 0 &&
+                            <Dropdown options={data.continents.map(o => { return { "value": o.code, "label": o.name } })}
+                                initial={selected}
+                                selectionChanged={selectionChanged} />
+                        }
+                        <div className="mr-2">==&gt;</div>
+                        <select name="selector" class="form-control" value={selected}>
+                            {data && data.continents && data.continents.map(o => <option value={o.code}>{o.name}</option>)}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col">
+                    {console.log(data.continents)}
+                    {data && data.continents && data.continents.length > 0 &&
+                        <ContinentList continents={data.continents} selected={selected} />}
+                    {!data && <div>no data...</div>}
+                </div>
+            </div>
+        </div>
     )
 }
 

@@ -8,26 +8,19 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import { About } from './components/About/About';
 
 
 export default function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-            <li>
-              <Link to="/apollo">apollo</Link>
-            </li>
+        <nav className='navbar navbar-expand-lg navbar-light bg-success navbar-full' style={{ "backgroundColor": "orange", "fontWeight": "bold" }}>
+          <ul className='navbar-nav'>
+            <Link to="/" className='nav-item nav-link m-1'>UseQuery</Link>
+            <Link to="/apollo" className='nav-item nav-link m-1'>Apollo</Link>
+            <Link to="/users" className='nav-item nav-link m-1'>Users</Link>
+            <Link to="/about" className='nav-item nav-link m-1'>About</Link>
           </ul>
         </nav>
 
@@ -50,22 +43,6 @@ export default function App() {
       </div>
     </Router>
   );
-
-  function About() {
-    return (
-      <>
-        <h2 className="text-center">About</h2>
-        <div>
-          several approach to fetch data via GraphQL
-        <ul>
-            <li>apollo</li>
-            <li>fetch</li>
-            <li>axiom</li>
-          </ul>
-        </div>
-      </>
-    )
-  }
 
   function Apollo() {
     return <h2>Apollo</h2>;
